@@ -18,6 +18,8 @@ import ru.job4j.chess.firuges.Figure;
 import ru.job4j.chess.firuges.black.*;
 import ru.job4j.chess.firuges.white.*;
 
+import java.util.Objects;
+
 public final class Chess extends Application {
     private static final String JOB4J = "Шахматы на www.job4j.ru";
     private final int size = 8;
@@ -44,7 +46,8 @@ public final class Chess extends Application {
         rect.setY(y);
         rect.setHeight(size);
         rect.setWidth(size);
-        Image img = new Image(getClass().getClassLoader().getResource(image).toString());
+        Image img = new Image(Objects.requireNonNull(getClass().getClassLoader()
+                .getResource(image)).toString());
         rect.setFill(new ImagePattern(img));
         final Rectangle momento = new Rectangle(x, y);
         rect.setOnDragDetected(
@@ -55,8 +58,8 @@ public final class Chess extends Application {
         );
         rect.setOnMouseDragged(
                 event -> {
-                    rect.setX(event.getX() - size / 2);
-                    rect.setY(event.getY() - size / 2);
+                    rect.setX(event.getX() - (double) size / 2);
+                    rect.setY(event.getY() - (double) size / 2);
                 }
         );
         rect.setOnMouseReleased(
@@ -65,14 +68,14 @@ public final class Chess extends Application {
                         logic.move(
                                 findBy(momento.getX(), momento.getY()),
                                 findBy(event.getX(), event.getY()));
-                        rect.setX(((int) event.getX() / 40) * 40 + 5);
-                        rect.setY(((int) event.getY() / 40) * 40 + 5);
+                        rect.setX(((double) (int) event.getX() / 40) * 40 + 5);
+                        rect.setY(((double) (int) event.getY() / 40) * 40 + 5);
                     } catch (Exception e) {
                         Alert info = new Alert(Alert.AlertType.ERROR);
                         info.setContentText(e.getClass().getName() +  " "  + e.getMessage());
                         info.show();
-                        rect.setX(((int) momento.getX() / 40) * 40 + 5);
-                        rect.setY(((int) momento.getY() / 40) * 40 + 5);
+                        rect.setX(((double) (int) momento.getX() / 40) * 40 + 5);
+                        rect.setY(((double) (int) momento.getY() / 40) * 40 + 5);
                     }
                 }
         );
