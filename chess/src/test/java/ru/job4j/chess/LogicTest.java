@@ -16,7 +16,8 @@ public class LogicTest {
         Logic logic = new Logic();
         logic.add(new BishopBlack(Cell.C1));
 
-        ImpossibleMoveException impossibleMoveException = assertThrows(ImpossibleMoveException.class, () -> logic.move(Cell.C1, Cell.H7));
+        ImpossibleMoveException impossibleMoveException =
+                assertThrows(ImpossibleMoveException.class, () -> logic.move(Cell.C1, Cell.H7));
 
         assertThat(impossibleMoveException.getMessage()).
                 isEqualTo("Could not move by diagonal from C1 to H7");
@@ -28,7 +29,8 @@ public class LogicTest {
         logic.add(new BishopBlack(Cell.C1));
         logic.add(new QueenBlack(Cell.E3));
 
-        OccupiedCellException occupiedCellException = assertThrows(OccupiedCellException.class, () -> logic.move(Cell.C1, Cell.H6));
+        OccupiedCellException occupiedCellException =
+                assertThrows(OccupiedCellException.class, () -> logic.move(Cell.C1, Cell.H6));
 
         assertThat(occupiedCellException.getMessage()).
                 isEqualTo("Ячейка занята");
@@ -39,7 +41,8 @@ public class LogicTest {
         Logic logic = new Logic();
         logic.add(new BishopBlack(Cell.C1));
 
-        FigureNotFoundException figureNotFoundException = assertThrows(FigureNotFoundException.class, () -> logic.move(Cell.D2, Cell.H6));
+        FigureNotFoundException figureNotFoundException =
+                assertThrows(FigureNotFoundException.class, () -> logic.move(Cell.D2, Cell.H6));
 
         assertThat(figureNotFoundException.getMessage()).
                 isEqualTo("Фигуры нет на клетке");
